@@ -1,7 +1,9 @@
-# html5-drum
-Simple html5 drum
+# HTML5-Drum
+A Simple html5 drum
 
 # TO DO
+- [x] Fix transition freeze when typing,tapping or clicking too fast
+
 - [ ] Fix double-tap zoom
 
 - [ ] Optimize latency
