@@ -9,6 +9,8 @@ Works by typing on your keyboard (a, k, j, h, g, f, d, s) and by tapping or clic
 
 - [ ] Optimize latency
 
+- [ ] Clean the code
+
 - [ ] Add more controls
 
 - [ ] Change UI
