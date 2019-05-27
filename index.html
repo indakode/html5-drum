@@ -65,6 +65,7 @@
 		<!-- Scripts -->
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/loadKit.js"></script>
+		<!-- Volume -->
 		<script>
 			function changeVol(val) {
 				const samples = document.querySelectorAll('audio');
@@ -75,12 +76,13 @@
 				});
 			}
 		</script>
+		<!-- Play audio -->
 		<script>
 			function removeTransition(e) {
 				if (e.propertyName !== 'transform') return;
 				e.target.classList.remove('playing');
 			}
-
+			
 			function playSound(e) {
 				let repeat = e.repeat;
 				if(repeat !== true){
