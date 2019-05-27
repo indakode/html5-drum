@@ -5,7 +5,8 @@ Works by typing on your keyboard (a, k, j, h, g, f, d, s) and by tapping or clic
 # TO DO
 - [x] Fix transition freeze when typing,tapping or clicking too fast
 
-- [ ] Fix double-tap zoom
+- [x] Fix double-tap zoom
+      - Tested on Android
 
 - [ ] Optimize latency
 
