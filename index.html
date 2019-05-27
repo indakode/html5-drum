@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Simple html5 drum-machine">
+		<meta name="keywords" content="html5,audio,drum,drum machine">
+		<meta name="author" content="indakom.com">
+		<title>HTML5-DRUM</title>
+		<!-- Custom styles for this template -->
+		<link href="style.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo">
+	</head>
+	<body>
+		<div class="body-container">
+			<header>
+				<nav id="mytitle">
+					<h1>HTML5 - DRUM</h1>
+					<div id="drumList">
+						<select id="banksSwitcher" name="sounds-kit" onchange="loadKit(event)">
+							<option value="Default">DEFAULT</option>
+							<option value="Casio-RZ1">RZ1</option>
+							<option value="Linn-LM1">LM1</option>
+							<option value="SC-Drumtracks">DRUMTRACKS</option>
+						</select>
+					</div>
+				</nav>
+			</header>
+			<div class="container main-container">
+				<div id="desk">
+					<div class="keys" id="kbd">
+						<div data-key="65" class="note pad">A</div>
+						<div data-key="83" class="note pad">S</div>
+						<div data-key="68" class="note pad">D</div>
+						<div data-key="70" class="note pad">F</div>
+						<div data-key="71" class="note pad">G</div>
+						<div data-key="72" class="note pad">H</div>
+						<div data-key="74" class="note pad">J</div>
+						<div data-key="75" class="note pad">K</div>
+					</div>
+				</div>
+				<form>
+					<div class="form-group" id="vol-control">
+						<label for="volRange">Volume</label>
+						<input type="range" class="custom-range" min="0" max="1" step="0.1" value="0.5" onchange="changeVol(this)" id="volRange">
+					</div>
+				</form>
+			</div>
+			<footer>
+				<p class="git"><a href="https://github.com/indakode/html5-drum">git</a></p>
+			</footer>
+		</div>
+		<!-- Audio Files -->
+		<audio data-key="65" src="sounds/DEFAULT/sample0.wav">Your browser doesn't support HTML5 audio tag.</audio>
+		<audio data-key="83" src="sounds/DEFAULT/sample1.wav">Your browser doesn't support HTML5 audio tag.</audio>
+		<audio data-key="68" src="sounds/DEFAULT/sample2.wav">Your browser doesn't support HTML5 audio tag.</audio>
+		<audio data-key="70" src="sounds/DEFAULT/sample3.wav">Your browser doesn't support HTML5 audio tag.</audio>
+		<audio data-key="71" src="sounds/DEFAULT/sample4.wav">Your browser doesn't support HTML5 audio tag.</audio>
+		<audio data-key="72" src="sounds/DEFAULT/sample5.wav">Your browser doesn't support HTML5 audio tag.</audio>
+		<audio data-key="74" src="sounds/DEFAULT/sample6.wav">Your browser doesn't support HTML5 audio tag.</audio>
+		<audio data-key="75" src="sounds/DEFAULT/sample7.wav">Your browser doesn't support HTML5 audio tag.</audio>
+	
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/loadKit.js"></script>
+		<script>
+			function changeVol(val) {
+				const samples = document.querySelectorAll('audio');
+				let globalVolume = 1;
+				samples.forEach(function(sample){
+					globalVolume = val.value / 1;
+					sample.volume = globalVolume;
+				});
+			}
+		</script>
+		<script>
+			function removeTransition(e) {
+				if (e.propertyName !== 'transform') return;
+				e.target.classList.remove('playing');
+			}
+
+			function playSound(e) {
+				let repeat = e.repeat;
+				if(repeat !== true){
+				const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+				const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+				if (!audio) return;
+
+				key.classList.add('playing');
+				audio.currentTime = 0;
+				audio.play();
+				}
+			}
+
+			function clickTouchPlay(e) {
+				let repeat = e.repeat;
+				if(repeat !== true){
+				const audio = document.querySelector(`audio[data-key="${e.target.dataset.key}"]`);
+				const key = document.querySelector(`div[data-key="${e.target.dataset.key}"]`);
+				if (!audio) return;
+
+				key.classList.add('playing');
+				audio.currentTime = 0;
+				audio.play();  
+				console.log('click', key);
+				}
+			}
+
+			const keys = Array.from(document.querySelectorAll('.pad'));
+			keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+			window.addEventListener('keydown', playSound);
+			/*keys.forEach(key => key.addEventListener('click', clickTouchPlay));*/
+			keys.forEach(key => key.addEventListener('touchstart', clickTouchPlay));
+			
+		</script>
+	</body>
+</html>
